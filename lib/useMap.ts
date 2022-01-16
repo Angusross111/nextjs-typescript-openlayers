@@ -125,7 +125,7 @@ const useMap = (mapid: string): UseMapReturn => {
         }
         removeLayer({ layerKey });
         map.addLayer(layer);
-        if (zoomTo) zoomToLayer({ layerObject: layer });
+        if (zoomTo) zoomToLayer({ layerKey: layerKey });
     };
 
     const setLayerVisibility = ({ layerKey, visible }: SetVisibleProps): void => {
@@ -170,9 +170,6 @@ const useMap = (mapid: string): UseMapReturn => {
             const source: VectorSource<any> = layer.getSource();
             const features = source.getFeatures();
             if (!features) return;
-
-            // @ts-ignore: Unreachable code error
-            // select.addFeatureLayerAssociation_(features[0], layer);
             select.getFeatures().clear();
             select.getFeatures().push(features[0]);
         }

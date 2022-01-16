@@ -39,7 +39,6 @@ export const olMapStore = memoize((id: string) =>
                 const map = new olMap({
                     layers: layers,
                     view: view,
-                    controls: [],
                 });
                 map.addInteraction(select);
                 return map;
@@ -56,5 +55,15 @@ export const mapSelect = memoize((id: string) =>
             hitTolerance: 4,
         }),
         dangerouslyAllowMutability: true,
+    })
+);
+export interface LayerStoreType {
+    uniqueId: string;
+    name: string;
+}
+export const layerStore = memoize((id: string) =>
+    atom<LayerStoreType[]>({
+        key: `layerStore-${id}`,
+        default: [],
     })
 );
