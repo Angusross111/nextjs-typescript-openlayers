@@ -1,28 +1,24 @@
-import React, { Suspense } from "react";
 import type { NextPage } from "next";
+import { Suspense } from "react";
+import Dropzone from "../components/dropzone";
+import EditTab from "../components/editTab";
+import LayerList from "../components/layerList";
+import { MapDisplay } from "../components/mapDisplay";
+import UtmStuff from "../components/utmStuff";
 import styles from "../styles/Home.module.css";
 
-import dynamic from "next/dynamic";
-import LayerList from "../components/layerList";
-
-const DynamicLazyComponent = dynamic(() => import("../components/mapComponent"), {
-    suspense: true,
-});
-
 const Home: NextPage = () => {
+    const mapID = "map1";
     return (
         <div className={styles.container}>
             <div className={styles.map1}>
                 <Suspense fallback={`loading`}>
-                    <DynamicLazyComponent id="map1" />
+                    <MapDisplay mapID={mapID} />
+                    <EditTab id={mapID} />
+                    <Dropzone id={mapID} />
+                    <UtmStuff id={mapID} />
+                    <LayerList id={mapID} />
                 </Suspense>
-                <LayerList id={"map1"} />
-            </div>
-            <div className={styles.map2}>
-                <Suspense fallback={`loading`}>
-                    <DynamicLazyComponent id="map2" />
-                </Suspense>
-                <LayerList id={"map2"} />
             </div>
         </div>
     );

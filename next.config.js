@@ -1,6 +1,5 @@
-/** @type {import('next').NextConfig} */
-module.exports = {
-    experimental: {
-        outputStandalone: true,
-    },
-};
+const withTM = require("next-transpile-modules")(["ol", "jsts"]);
+module.exports = withTM({
+    reactStrictMode: true,
+    productionBrowserSourceMaps: true,
+});
