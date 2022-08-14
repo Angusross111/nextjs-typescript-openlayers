@@ -13,7 +13,7 @@ const Home: NextPage = () => {
         <div className={styles.container}>
             <div className={styles.map1}>
                 <Suspense fallback={`loading`}>
-                    <MapDisplay mapID={mapID} />
+                    <MapDisplay mapID={mapID} className={styles.mapComponent} />
                     <EditTab id={mapID} />
                     <Dropzone id={mapID} />
                     <UtmStuff id={mapID} />

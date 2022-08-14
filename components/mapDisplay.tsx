@@ -1,4 +1,8 @@
-import React, { useEffect, useRef } from "react";
+import Collection from "ol/Collection";
+import Feature from "ol/Feature";
+import { Geometry } from "ol/geom";
+import { ModifyEvent } from "ol/interaction/Modify";
+import { useEffect, useRef } from "react";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import {
     lastModifiedLayerKey,
@@ -13,14 +17,14 @@ import {
     undoStackState,
 } from "../lib/recoil";
 import LayerSwitcher from "./layerSwitcher";
-import styles from "../styles/Home.module.css";
-import { ModifyEvent } from "ol/interaction/Modify";
-import { SelectEvent } from "ol/interaction/Select";
-import Collection from "ol/Collection";
-import Feature from "ol/Feature";
-import { Geometry } from "ol/geom";
 
-export function MapDisplay({ mapID }: { mapID: string }) {
+export function MapDisplay({
+    mapID,
+    className,
+}: {
+    mapID: string;
+    className: string;
+}) {
     const mapElement = useRef<HTMLDivElement | null>(null);
     const map = useRecoilValue(olMapStore(mapID));
     const initLayers = useRecoilValue(mapLayersStore(mapID));
@@ -93,7 +97,7 @@ export function MapDisplay({ mapID }: { mapID: string }) {
     }, [redoStack, undoStack]);
 
     return (
-        <div id={mapID} ref={mapElement} className={styles.mapComponent}>
+        <div id={mapID} ref={mapElement} className={className}>
             <LayerSwitcher id={mapID} map={map} layers={initLayers} />
         </div>
     );
